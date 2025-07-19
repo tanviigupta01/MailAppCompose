@@ -1,0 +1,80 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+}
+
+android {
+    namespace 'com.example.assignment'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.assignment"
+        minSdk 28
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "2.0.1" // Use the Kotlin version's compatible compiler
+    }
+}
+
+dependencies {
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.ui.tooling.preview)
+
+    // Existing dependencies
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.activity.compose)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.gson)
+
+    implementation(libs.rxjava3)
+    implementation(libs.rxkotlin)
+    implementation(libs.rxadapter)
+
+    implementation(libs.nav.fragment)
+    implementation(libs.nav.ui)
+    implementation(libs.coil.compose)
+    implementation(libs.rxandroid)
+
+    implementation libs.androidx.navigation.compose
+    implementation libs.accompanist.placeholder.material
+    implementation(libs.androidx.datastore.preferences)
+
+
+
+}
