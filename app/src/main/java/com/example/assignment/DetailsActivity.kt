@@ -10,8 +10,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -31,14 +32,24 @@ fun DetailScreen(
     }
 
     Scaffold(
+        containerColor = Color(0xFF1A1A1A),
         topBar = {
             TopAppBar(
-                title = { Text("Detail View") },
+                title = {
+                    Text("Detail View", color = Color.White)
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = Color.White
+                        )
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF2D2D2D)
+                )
             )
         }
     ) { innerPadding ->
@@ -46,13 +57,20 @@ fun DetailScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
-                .padding(16.dp),
+                .padding(20.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             if (item == null) {
-                Text("No data found", style = MaterialTheme.typography.bodyLarge)
+                Text(
+                    text = "No data found",
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = Color.White
+                )
             } else {
                 Card(
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color(0xFF2D2D2D)
+                    ),
                     shape = RoundedCornerShape(16.dp),
                     elevation = CardDefaults.cardElevation(6.dp),
                     modifier = Modifier
@@ -64,11 +82,14 @@ fun DetailScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(20.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text(
                             text = item.meal.strMeal,
-                            style = MaterialTheme.typography.headlineSmall
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
                         )
 
                         AsyncImage(
@@ -77,22 +98,33 @@ fun DetailScreen(
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(200.dp)
+                                .height(220.dp)
                                 .clip(RoundedCornerShape(12.dp))
                         )
 
                         Text(
-                            text = "Description: ${item.post.title}",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.secondary
+                            text = "Description",
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                color = Color(0xFF6C5CE7),
+                                fontWeight = FontWeight.SemiBold
+                            )
                         )
 
-                        Divider()
+                        Text(
+                            text = item.post.title,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = Color.LightGray
+                            )
+                        )
+
+                        Divider(color = Color.DarkGray)
 
                         Text(
                             text = item.post.body,
-                            style = MaterialTheme.typography.bodyMedium,
-                            lineHeight = 22.sp
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                color = Color.White,
+                                lineHeight = 22.sp
+                            )
                         )
                     }
                 }
@@ -100,7 +132,3 @@ fun DetailScreen(
         }
     }
 }
-
-
-
-

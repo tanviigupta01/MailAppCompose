@@ -7,22 +7,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -184,27 +182,32 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
 
-                                FloatingActionButton(
-                                    onClick = { navController.navigate("viewFeedback") },
-                                    containerColor = Color(0xFF6C5CE7),
-                                    contentColor = Color.White,
+                                Row(
                                     modifier = Modifier
-                                        .align(Alignment.BottomStart)
-                                        .padding(16.dp)
+                                        .align(Alignment.BottomCenter)
+                                        .fillMaxWidth()
+                                        .background(Color(0xFF2D2D2D))
+                                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Icon(Icons.Default.Info, contentDescription = "View Feedback")
+                                    TextButton(onClick = { navController.navigate("viewFeedback") }) {
+                                        Text(
+                                            text = "View Feedback",
+                                            color = Color(0xFF6C5CE7),
+                                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold)
+                                        )
+                                    }
+
+                                    TextButton(onClick = { navController.navigate("feedback") }) {
+                                        Text(
+                                            text = "Give Feedback",
+                                            color = Color(0xFF6C5CE7),
+                                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold)
+                                        )
+                                    }
                                 }
 
-                                FloatingActionButton(
-                                    onClick = { navController.navigate("feedback") },
-                                    containerColor = Color(0xFF6C5CE7),
-                                    contentColor = Color.White,
-                                    modifier = Modifier
-                                        .align(Alignment.BottomEnd)
-                                        .padding(16.dp)
-                                ) {
-                                    Icon(Icons.Default.AccountCircle, contentDescription = "Give Feedback")
-                                }
                             }
                         }
                     }
